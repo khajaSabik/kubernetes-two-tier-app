@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
                 - name: frontend
-                  image: akpaul1991/kube-frontend:v2
+                  image: khajasabik/kube-frontend:v4
                   ports:
                     - containerPort: 80
 
