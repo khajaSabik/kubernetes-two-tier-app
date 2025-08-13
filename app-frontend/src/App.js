@@ -1,14 +1,14 @@
+// src/App.js
 import React from 'react';
 import './App.css';
 import Reverser from './components/reverser';
 import Summation from './components/summation';
 
-
 function App() {
   return (
     <div className="app">
-      <Reverser/>
-      <Summation/>
+      <Reverser />
+      <Summation />
     </div>
   );
 }
