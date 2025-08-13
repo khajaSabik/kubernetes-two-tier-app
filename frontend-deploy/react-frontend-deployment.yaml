@@ -32,3 +32,24 @@ spec:
         - port: 80
           targetPort: 80
           nodePort: 30006
+
+
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: hello-world.example
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-nodeport-service
+                port:
+                  number: 80
