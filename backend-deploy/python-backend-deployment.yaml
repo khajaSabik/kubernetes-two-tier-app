@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: python-backend-service
-        image: khajasabik/kube-backend:v4
+        image: khajasabik/kube-backend:v5
         imagePullPolicy: Always
 
 ---

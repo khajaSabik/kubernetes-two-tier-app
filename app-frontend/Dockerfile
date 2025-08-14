@@ -1,21 +1,8 @@
- 
-FROM node:11.10.0-alpine AS build-stage
-
-RUN apk add --update --no-cache \
-    python \
-    make \
-    g++
-
-COPY . /src
-WORKDIR /src
-COPY ./package* ./
+# Stage 1: Build React app
+FROM node:16 as build
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
-RUN yarn build
-
-FROM nginx:latest
-RUN rm -rf /usr/share/nginx/html
-RUN mkdir /usr/share/nginx/html
-COPY --from=build-stage /src/build/ /usr/share/nginx/html/
-COPY default.conf /etc/nginx/conf.d/
-EXPOSE 80
-CMD ["nginx-debug", "-g", "daemon off;"]
+COPY . .
+ENV NODE_OPTIONS=--openssl-legacy-provider
+RUN npm run build

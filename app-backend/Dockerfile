@@ -1,17 +1,23 @@
-FROM python:3.8.7-slim-buster
+# Use a supported Python base image
+FROM python:3.11-slim
 
-RUN mkdir /app
+# Set working directory
 WORKDIR /app
 
-RUN apt-get update -y 
-RUN apt-get install -y python-pip python-dev
+# Install system dependencies
+RUN apt-get update -y && \
+    apt-get install -y python3-dev gcc && \
+    rm -rf /var/lib/apt/lists/*
 
+# Copy requirements and install Python packages
 COPY ./requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install -r requirements.txt
+# Copy application code
+COPY . /app
 
-ADD . /app
-
+# Expose Flask port
 EXPOSE 5000
 
-CMD flask run --host=0.0.0.0
+# Run Flask app on all interfaces
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
