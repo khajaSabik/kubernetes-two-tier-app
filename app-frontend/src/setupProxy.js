@@ -1,19 +1,21 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-module.exports = app => {
+const API_URL = process.env.REACT_APP_BACKEND_URL;
+
+module.exports = (app) => {
   app.use(
     "/reverser",
     createProxyMiddleware({
-      target: "http://localhost:5000",
-      changeOrigin: true
+      target: API_URL,
+      changeOrigin: true,
     })
   );
 
   app.use(
     "/summation",
     createProxyMiddleware({
-      target: "http://localhost:5000",
-      changeOrigin: true
+      target: API_URL,
+      changeOrigin: true,
     })
   );
-}
+};
