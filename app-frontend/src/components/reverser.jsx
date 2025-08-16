@@ -14,7 +14,7 @@ class Reverser extends Component {
 
     handleSubmit = () => {
         // Use Kubernetes service name to access backend
-        axios.post('${process.env.REACT_APP_BACKEND_URL}/reverser', { num: this.state.num })
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/reverser`, { num: this.state.num })
         .then(res => {
             this.setState({ reverseNum: res.data.num });
         })
