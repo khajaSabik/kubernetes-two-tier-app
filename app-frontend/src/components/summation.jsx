@@ -15,7 +15,7 @@ class Summation extends Component {
 
     handleSubmit = () => {
         // Use Kubernetes service name to access backend
-        axios.post('http://python-backend-service:5000/summation', {
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/summation`, {
             num1: this.state.num1,
             num2: this.state.num2
         })
