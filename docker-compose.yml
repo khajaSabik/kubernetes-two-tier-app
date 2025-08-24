@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./app-backend
+    container_name: backend
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build:
+      context: ./app-frontend
+      args:
+        REACT_APP_API_URL: http://localhost:5000/
+    container_name: frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+
